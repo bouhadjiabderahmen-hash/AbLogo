@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="description" content="استوديو عبدو لتصميم الشعارات الاحترافية بالذكاء الاصطناعي">
+<meta name="keywords" content="تصميم شعار, عبدو لوجو, logo design, abdou studio">
+<title>Abdou Logo Studio - اصنع شعارك الآن</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AbLogo Studio | ابتكار بلا حدود</title>
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;900&family=Cairo:wght@400;700;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="style.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+</head>
+<body>
+
+    <div class="animated-bg"></div>
+
+    <header>
+        <div class="logo-area">
+            <h1 class="main-title">Ab<span>Logo</span> <i class="fas fa-rocket"></i></h1>
+            <p>استوديو الجيل القادم لتصميم الهوية البصرية</p>
+        </div>
+    </header>
+
+    <main class="main-container">
+        <aside class="controls-panel">
+            <h3><i class="fas fa-magic"></i> أدوات التصميم</h3>
+            
+            <div class="input-box">
+                <label>نص العلامة التجارية</label>
+                <input type="text" id="logoText" value="AbLogo" oninput="updateLogo()">
+            </div>
+
+            <div class="input-box">
+                <label>اختر الأيقونة</label>
+                <select id="iconSelect" onchange="updateLogo()">
+                    <option value="fa-bolt">برق ⚡</option>
+                    <option value="fa-lightbulb">فكرة 💡</option>
+                    <option value="fa-crown">ملكي 👑</option>
+                    <option value="fa-code">برمجة 💻</option>
+                    <option value="fa-star">نجمة ⭐</option>
+                    <option value="fa-leaf">طبيعة 🌿</option>
+                </select>
+            </div>
+
+            <div class="grid-inputs">
+                <div class="input-box">
+                    <label>لون النص</label>
+                    <input type="color" id="textColor" value="#00f2fe" onchange="updateLogo()">
+                </div>
+                <div class="input-box">
+                    <label>لون الأيقونة</label>
+                    <input type="color" id="iconColor" value="#4facfe" onchange="updateLogo()">
+                </div>
+            </div>
+
+            <div class="input-box">
+                <label>نوع الخط</label>
+                <select id="fontFamily" onchange="updateLogo()">
+                    <option value="'Orbitron', sans-serif">Modern Tech</option>
+                    <option value="'Cairo', sans-serif">Arabic Elegant</option>
+                    <option value="serif">Classic</option>
+                </select>
+            </div>
+
+            <div class="input-box">
+                <label>حجم الشعار</label>
+                <input type="range" id="logoSize" min="40" max="150" value="80" oninput="updateLogo()">
+            </div>
+
+            <button class="download-btn" onclick="downloadLogo()">
+                <i class="fas fa-cloud-download-alt"></i> تحميل بصيغة PNG
+            </button>
+        </aside>
+
+        <section class="display-panel">
+            <div id="captureArea" class="logo-canvas">
+                <div id="logoContent">
+                    <i id="logoIcon" class="fas fa-bolt"></i>
+                    <span id="logoSpan">AbLogo</span>
+                </div>
+                <div class="reflection"></div>
+            </div>
+        </section>
+        <section class="display-panel">
+    <div id="captureArea" class="logo-canvas ai-style">
+        <div class="ai-glow-effect"></div>
+        
+        <div id="logoContent">
+            <div class="icon-wrapper">
+                <i id="logoIcon" class="fas fa-bolt"></i>
+            </div>
+            <span id="logoSpan">AbLogo</span>
+        </div>
+
+        <div class="tech-lines">
+            <span></span><span></span><span></span>
+        </div>
+    </div>
+</section>
+    </main>
+
+    <script>
+        function updateLogo() {
+            const text = document.getElementById('logoText').value;
+            const icon = document.getElementById('iconSelect').value;
+            const textColor = document.getElementById('textColor').value;
+            const iconColor = document.getElementById('iconColor').value;
+            const fontSize = document.getElementById('logoSize').value;
+            const fontFamily = document.getElementById('fontFamily').value;
+
+            const logoSpan = document.getElementById('logoSpan');
+            const logoIcon = document.getElementById('logoIcon');
+
+            logoSpan.innerText = text;
+            logoSpan.style.color = textColor;
+            logoSpan.style.fontSize = fontSize + 'px';
+            logoSpan.style.fontFamily = fontFamily;
+
+            logoIcon.className = 'fas ' + icon;
+            logoIcon.style.color = iconColor;
+            logoIcon.style.fontSize = (fontSize * 0.8) + 'px';
+        }
+
+        function downloadLogo() {
+            const area = document.getElementById('captureArea');
+            html2canvas(area, { backgroundColor: null }).then(canvas => {
+                const link = document.createElement('a');
+                link.download = 'AbLogo-Design.png';
+                link.href = canvas.toDataURL();
+                link.click();
+            });
+        }
+        window.onload = updateLogo;
+    </script>
+</body>
+</html>
